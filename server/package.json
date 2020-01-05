@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "keypress": "^0.2.1",
+    "nodemon": "^2.0.2",
     "parse-multipart": "^1.0.4",
     "underscore": "^1.9.1"
   },

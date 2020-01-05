@@ -1,5 +1,7 @@
 const _ = require('underscore');
 const keypress = require('keypress');
+///// @yx do we require messageQueue to access its exported modules
+const messageQueue = require('./messageQueue');
 
 ///////////////////////////////////////////////////////////////////////////////
 // Utility Function ///////////////////////////////////////////////////////////
@@ -26,10 +28,13 @@ const logKeypress = (key) => {
 
 var message = ''; // a buffer to collect key presses
 
+////////// @yx the callback function here is the keypressHandler.enqueue method
 module.exports.initialize = (callback) => {
 
   // setup an event handler on standard input
   process.stdin.on('keypress', (chunk, key) => {
+    ////////// @yx added console.log
+    console.log('initialize keypressHandler "keypress"', key);
     // ctrl+c should quit the program
     if (key && key.ctrl && key.name === 'c') {
       process.exit();
@@ -40,7 +45,7 @@ module.exports.initialize = (callback) => {
       callback(key.name);
       return; // don't do any more processing on this key
     }
-    
+
     // otherwise build up a message from individual characters
     if (key && (key.name === 'return' || key.name === 'enter')) {
       // on enter, process the message
@@ -67,3 +72,9 @@ if (process.stdin.setRawMode) {
   // configure stdin for raw mode, if possible
   process.stdin.setRawMode(true);
 }
+
+
+
+/* documentation
+keypress https://www.npmjs.com/package/keypress
+*/

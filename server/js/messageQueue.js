@@ -1,3 +1,7 @@
+///// @yx do we require keypress to access its exported modules
+const keypressHandler = require('./keypressHandler');
+
+
 const messages = []; // the storage unit for messages
 
 module.exports.enqueue = (message) => {
